@@ -30,6 +30,11 @@
 import * as THREE from
 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
 
+import { OrbitControls } from
+'https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js';
+
+import { TransformControls } from
+'https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/TransformControls.js';
 
 // ============================
 // SCENE
@@ -53,6 +58,13 @@ const camera = new THREE.PerspectiveCamera(
 
 camera.position.set(4, 3, 6);
 
+const orbitControls = new OrbitControls(
+    camera,
+    renderer.domElement
+);
+
+orbitControls.enableDamping = true;
+orbitControls.target.set(0, 1, 0);
 
 // ============================
 // RENDERER
@@ -122,6 +134,15 @@ const cube =
 
 scene.add(cube);
 
+const transformControls =
+    new TransformControls(
+        camera,
+        renderer.domElement
+    );
+
+scene.add(transformControls);
+
+transformControls.attach(cube);
 
 // ============================
 // GROUND
@@ -166,6 +187,8 @@ scene.add(grid);
 function animate() {
 
     requestAnimationFrame(animate);
+
+    orbitControls.update();
 
     renderer.render(
         scene,
