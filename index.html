@@ -58,14 +58,6 @@ const camera = new THREE.PerspectiveCamera(
 
 camera.position.set(4, 3, 6);
 
-const orbitControls = new OrbitControls(
-    camera,
-    renderer.domElement
-);
-
-orbitControls.enableDamping = true;
-orbitControls.target.set(0, 1, 0);
-
 // ============================
 // RENDERER
 // ============================
@@ -83,6 +75,13 @@ renderer.setPixelRatio(
     window.devicePixelRatio
 );
 
+    const orbitControls = new OrbitControls(
+    camera,
+    renderer.domElement
+);
+
+orbitControls.enableDamping = true;
+orbitControls.target.set(0, 1, 0);
 document
     .getElementById("editor")
     .appendChild(renderer.domElement);
